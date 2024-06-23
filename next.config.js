@@ -1,16 +1,41 @@
 const { join } = require('path');
 const { parsed: myEnv } = require('dotenv').config({
-    path:join(__dirname, '.env')
+    path: join(__dirname, '.env')
 });
 module.exports = {
     webpack: function (config, { buildId, dev, isServer, defaultLoaders, webpack }) {
         // Add support for environment variables
         config.plugins.push(new webpack.EnvironmentPlugin(myEnv));
-        // Add support for SCSS
+        
+        // Simplify and correct CSS handling
+        // Remove the duplicate and conflicting CSS rules
+        // Ensure only one rule for CSS and one for SCSS
+
+        // Consolidated rule for CSS (including CSS modules and node_modules)
+        config.module.rules.push({
+            test: /\.css$/,
+            use: [
+                'style-loader',
+                {
+                    loader: 'css-loader',
+                    options: {
+                        importLoaders: 1,
+                        modules: {
+                            auto: (resourcePath) => !resourcePath.includes('node_modules') && resourcePath.endsWith('.module.css'),
+                        },
+                    },
+                },
+                'postcss-loader',
+            ],
+        });
+
+        // Adjusted rule for SCSS
         config.module.rules.push({
             test: /\.scss$/,
             use: [
-                defaultLoaders.babel,
+                'style-loader',
+                'css-loader',
+                'postcss-loader',
                 {
                     loader: 'sass-loader',
                     options: {
@@ -22,12 +47,7 @@ module.exports = {
             ],
         });
 
-        //Add support for CSS
-        config.module.rules.push({
-            test: /\.css$/,
-            include: join(__dirname, 'src'),
-            use: ['style-loader', 'css-loader', 'postcss-loader'],
-        });
+        
 
         // Add support for fonts
         config.module.rules.push({
