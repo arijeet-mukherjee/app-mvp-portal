@@ -1,0 +1,16 @@
+@import url("../global.module.css");
+
+.container {
+    width: 100vw;
+    height: 100vh;
+    overflow-x: hidden;
+    overflow-y: hidden;
+}
+
+.whiteBackground {
+    background: var(--text-icon-color);
+}
+
+@media(max-width: 1200px) {
+    
+}
