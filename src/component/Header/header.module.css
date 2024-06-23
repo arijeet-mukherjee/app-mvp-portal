@@ -1,0 +1,16 @@
+.headerDefaultCss{
+    display: grid;
+    grid-template-columns: auto 1fr;
+    width: 100%; /* Ensure the header takes full width */
+    justify-content: center;
+    align-items: center;
+    margin: 32px 16px;
+}
+
+.backButton {
+    justify-self: start; /* Align the back button to the left */
+}
+
+.headerText {
+    justify-self: end; /* Align the text to the right */
+}

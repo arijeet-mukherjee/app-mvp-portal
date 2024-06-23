@@ -1,0 +1,24 @@
+.sidebaritem {
+    display: grid; /* Use grid layout */
+    grid-template-columns: 1fr; /* icon, text, optional SVG */
+    align-items: center; /* Center items vertically */
+    gap: 10px; /* Adjust the gap between grid items as needed */
+}
+
+.sidebaritemLink{
+    display: grid;
+    gap: 20px;
+    grid-template-columns: auto 1fr;
+    grid-template-rows: 1fr;
+    color: #fff;
+    text-decoration: none;
+    padding-left: calc((100vw / 1920) * 16);
+    padding-top: calc((100vw / 1920) * 8);
+    padding-bottom: calc((100vw / 1920) * 8);
+    transition: background-color 0.3s;
+}
+
+.sidebaritemActive{
+    background-color: #5F44FF;
+    color: #fff;
+}

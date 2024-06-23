@@ -1,11 +1,8 @@
-import type { Metadata } from "next";
-import { Inter } from "next/font/google";
-
-const inter = Inter({ subsets: ["latin"] });
-export const metadata: Metadata = {
-  title: "SecDesk | MVP Portal",
-  description: "Designed and Developed by CodeNebula"
-};
+"use client";
+import "@/css/satoshi.css";
+import "@/css/style.css";
+import "jsvectormap/dist/jsvectormap.css";
+import "flatpickr/dist/flatpickr.min.css";
 
 export default function RootLayout({
   children,
@@ -17,7 +14,11 @@ export default function RootLayout({
       <head>
         <link rel="icon" href="../../micrologo.svg" />
       </head>
-      <body className={inter.className}>{children}</body>
+      <body suppressHydrationWarning={true} className="body">
+        <div className="dark:bg-boxdark-2 dark:text-bodydark grid grid-cols-1">
+          {children}
+        </div>
+      </body>
     </html>
   );
 }

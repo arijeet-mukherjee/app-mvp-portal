@@ -1,0 +1,6 @@
+.defaultLayout {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  overflow: hidden;
+  height: 100vh;
+}

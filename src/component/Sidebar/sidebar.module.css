@@ -1,0 +1,63 @@
+.sidebarBgColor {
+    background-color: #08031b !important;
+    color: #fff !important;
+    height: 100%;
+}
+
+.sidebarPadding {
+    padding: 1.5rem 1rem !important;
+}
+
+.secdesk_logo{
+    width: calc((100vw / 1920) * 175);
+    height: calc((100vw / 1920) * 47.55);
+}
+
+.logo {
+    height: auto;
+    width: auto;
+    padding-left: calc((100vw / 1920) * 16);
+    padding-top: calc((100vw / 1920) * 16);
+    padding-bottom: calc((100vw / 1920) * 8);
+    margin-top: calc((100vw / 1920) * 16) ;
+    margin-bottom: calc((100vw / 1920) * 16);
+    display: grid;
+    grid-template-columns: 1fr;
+}
+
+.sidebar {
+    display: grid;
+    grid-template-rows: auto 1fr;
+    height: 100%;
+    width: calc((100vw / 1920) * 300);
+    /* padding: calc((100vw / 1920) * 16); */
+    gap: 8px;
+}
+
+.sideBarItemDiv {
+    display: grid;
+    grid-template-rows: auto ;
+    gap: 16px;
+    padding: 8px 0;
+    align-items: center;
+    cursor: pointer;
+    overflow-y: auto;
+    height: 100%;
+    align-items: self-start;
+}
+
+.sideBarItems {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 8px;
+    align-items: center;
+    /* padding: 8px; */
+    border-radius: 8px;
+    transition: background-color 0.3s;
+}
+
+.sideBarItem{
+    display: grid;
+    gap: 4px;
+    grid-template-columns: auto;
+}
