@@ -8,7 +8,6 @@ function Error({ statusCode }: { statusCode: number }) {
         // Return the Unauthorized component for 401 errors
         return <Unauthorized />;
     }
-    console.log(statusCode);
 
     // Handle other status codes or return a generic error message
     return (
