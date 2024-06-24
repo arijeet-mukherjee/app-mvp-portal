@@ -13,20 +13,20 @@ export const metadata: Metadata = {
 const Profile = () => {
   return (
     <DefaultLayout>
-      <div className="mx-auto max-w-242.5">
+      <div className="mx-auto max-w-full max-h-full ml-4">
         <Breadcrumb pageName="Profile" />
 
-        <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark">
+        <div className="overflow-hidden rounded-sm border border-stroke bg-white shadow-default dark:border-strokedark dark:bg-boxdark mr-4 mt-2">
           <div className="relative z-20 h-35 md:h-65">
             <Image
-              src={"/images/cover/cover-01.png"}
+              src={"/navModalBackground.svg"}
               alt="profile cover"
-              className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center"
+              className="h-full w-full rounded-tl-sm rounded-tr-sm object-cover object-center bg-white"
               width={970}
-              height={260}
+              height={60}
               style={{
-                width: "auto",
-                height: "auto",
+                width: "100%",
+                height: "100%"
               }}
             />
             <div className="absolute bottom-1 right-1 z-10 xsm:bottom-4 xsm:right-4">
@@ -71,12 +71,13 @@ const Profile = () => {
             <div className="relative z-30 mx-auto -mt-22 h-30 w-full max-w-30 rounded-full bg-white/20 p-1 backdrop-blur sm:h-44 sm:max-w-44 sm:p-3">
               <div className="relative drop-shadow-2">
                 <Image
-                  src={"/images/user/user-06.png"}
+                  src={"/ari.png"}
                   width={160}
                   height={160}
                   style={{
                     width: "auto",
                     height: "auto",
+                    borderRadius: "50%"
                   }}
                   alt="profile"
                 />
@@ -128,7 +129,7 @@ const Profile = () => {
                 </div>
                 <div className="flex flex-col items-center justify-center gap-1 border-r border-stroke px-4 dark:border-strokedark xsm:flex-row">
                   <span className="font-semibold text-black dark:text-white">
-                    129K
+                    2M
                   </span>
                   <span className="text-sm">Followers</span>
                 </div>
