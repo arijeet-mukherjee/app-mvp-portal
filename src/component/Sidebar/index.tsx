@@ -15,7 +15,7 @@ interface SidebarProps {
   setSidebarOpen: (arg: boolean) => void;
 }
 
-const menuGroups : SidebarItemType[] = [
+const menuGroups: SidebarItemType[] = [
   {
     name: "MENU",
     menuItems: [
@@ -83,7 +83,7 @@ const menuGroups : SidebarItemType[] = [
           </svg>
         ),
         label: "Settings",
-        route: "#"
+        route: "/settings",
       }
     ],
   }
