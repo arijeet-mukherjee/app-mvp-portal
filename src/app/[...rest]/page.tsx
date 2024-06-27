@@ -1,9 +1,15 @@
-import { NextPageContext } from 'next';
-import Unauthorized from '../unauthorized/page'; // Adjust the import path based on your structure
-
 import DefaultLayout from "@/component/Layouts/DefaultLayout";
+import Unauthorized from '../unauthorized/page'; // Ensure you have this component imported
 
-function Error({ statusCode }: { statusCode: number }) {
+// You can still define BlockedProps for internal use or documentation purposes
+interface BlockedProps {
+  statusCode?: number;
+}
+
+// Type the component props as any to ensure compatibility with Next.js
+const Blocked: React.FC<any> = (props) => {
+    const { statusCode } = props as BlockedProps;
+
     if (statusCode === 401 || statusCode === 404) {
         // Return the Unauthorized component for 401 errors
         return <Unauthorized />;
@@ -14,22 +20,14 @@ function Error({ statusCode }: { statusCode: number }) {
         <DefaultLayout>
             <div className="mx-auto max-w-full">
                 <div className="flex flex-col items-center justify-center min-h-screen">
-                    <h1 className="text-4xl font-bold">401 - Unauthorized</h1>
-                    <p className="mt-4">Sorry, you do not have access to this page.</p>
+                    <h1 className="text-4xl font-bold">Error</h1>
                     <p className="mt-4">
-                        {statusCode
-                            ? `An error ${statusCode} occurred on server`
-                            : 'An error occurred on client'}</p>
-                    <a href="/" className="mt-6 text-blue-500 hover:text-blue-700">Go back home</a>
+                        {statusCode ? `Error ${statusCode}` : "An error occurred"}
+                    </p>
                 </div>
             </div>
         </DefaultLayout>
     );
-}
-
-Error.getInitialProps = ({ res, err }: NextPageContext) => {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : 404;
-    return { statusCode };
 };
 
-export default Error;
+export default Blocked;
