@@ -11,7 +11,7 @@ export default function DefaultLayout({
 }: {
   children: React.ReactNode;
 }) {
-  const [sidebarOpen, setSidebarOpen] = useState(false);
+  
   return (
     <>
       <Provider store={store}>
@@ -20,13 +20,13 @@ export default function DefaultLayout({
           {/* <!-- ===== Page Wrapper Start ===== --> */}
           <div className={styles.defaultLayout}>
             {/* <!-- ===== Sidebar Start ===== --> */}
-            <Sidebar sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+            <Sidebar/>
             {/* <!-- ===== Sidebar End ===== --> */}
 
             {/* <!-- ===== Content Area Start ===== --> */}
             <div className="relative flex flex-1 flex-col overflow-y-auto overflow-x-hidden">
               {/* <!-- ===== Header Start ===== --> */}
-              <Header sidebarOpen={sidebarOpen} setSidebarOpen={setSidebarOpen} />
+              <Header/>
               {/* <!-- ===== Header End ===== --> */}
 
               {/* <!-- ===== Main Content Start ===== --> */}

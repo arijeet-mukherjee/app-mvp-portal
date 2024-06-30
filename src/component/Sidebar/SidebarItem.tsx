@@ -3,15 +3,29 @@ import React from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 import styles from "./SidebarItem.module.css";
+import { useAppSelector, useAppDispatch } from "@store/store";
+import { setRoute } from "@store/routeVisitedSlice";
 
-const SidebarItem = ({ item, pageName, setPageName }: any) => {
+
+const SidebarItem = ({ item, pageName, setPageName, sidebarOpen}: any) => {
+  const pathname = usePathname();
+  const dispatch = useAppDispatch();
+  
+  const routeVisited = useAppSelector((state) => {
+    state.routeVisitedConfig.routeVisited
+    const routes = state.routeVisitedConfig.routeVisited;
+    return routes[routes.length - 1];
+  });
+
   const handleClick = () => {
+    if(routeVisited !== pathname){
+      dispatch(setRoute(pathname));
+    }
     const updatedPageName =
       pageName !== item.label.toLowerCase() ? item.label.toLowerCase() : "";
     return setPageName(updatedPageName);
   };
 
-  const pathname = usePathname();
 
   const isActive = (item: any) => {
     if (item.route === pathname) return true;
@@ -25,25 +39,29 @@ const SidebarItem = ({ item, pageName, setPageName }: any) => {
 
   return (
     <>
-      <li className={styles.sidebaritem}>
+      <li className={styles.sidebaritem} style={sidebarOpen ? {justifyItems :'center'} : {}}>
         <Link
           href={item.route}
           onClick={handleClick}
+          style={sidebarOpen ? {gridTemplateColumns:'auto'} : {} }
           className={`${isItemActive ? styles.sidebaritemActive : ""} ${styles.sidebaritemLink}`}
         >
-          <span>
+        <span className={styles.imageIcon}>
             {item.icon}
           </span>
+
+          {!sidebarOpen && 
           <span>
           {item.label}
-          </span>
+          </span> }
+          
           {item.children && (
             <svg
               className={`${
                 pageName === item.label.toLowerCase() && "rotate-180"
               }`}
-              width="20"
-              height="20"
+              width="27.5"
+              height="22"
               viewBox="0 0 20 20"
               fill="none"
               xmlns="http://www.w3.org/2000/svg"

@@ -4,11 +4,22 @@ import DarkModeSwitcher from "./DarkModeSwitcher";
 import DropdownUser from "./DropdownUser";
 import Image from "next/image";
 import styles from "./header.module.css";
+import { useAppSelector, useAppDispatch } from "@store/store";
+import { removeLastRoute } from "@store/routeVisitedSlice";
+import { useEffect } from "react";
 
 const Header = (props: {
-  sidebarOpen: string | boolean | undefined;
-  setSidebarOpen: (arg0: boolean) => void;
+  // sidebarOpen: string | boolean | undefined;
+  // setSidebarOpen: (arg0: boolean) => void;
 }) => {
+  const routeVisited = useAppSelector(state => state.routeVisitedConfig.routeVisited);
+
+  const dispatch = useAppDispatch();
+
+  useEffect(()=>{
+    console.log(routeVisited);
+  })
+
   return (
     <header className="sticky top-0 z-999 flex w-full drop-shadow-1 dark:bg-boxdark dark:drop-shadow-none">
       <div className={styles.headerDefaultCss}>
@@ -18,7 +29,9 @@ const Header = (props: {
             aria-controls="sidebar"
             onClick={(e) => {
               e.stopPropagation();
-              props.setSidebarOpen(!props.sidebarOpen);
+              dispatch(removeLastRoute());
+              // console.log(routeVisited);                            
+              // props.setSidebarOpen(!props.sidebarOpen);
             }}
             className={styles.backBuuton}
           >
@@ -27,6 +40,7 @@ const Header = (props: {
               alt="back"
               width={24}
               height={24}
+              style={{transform: 'rotate(180deg)'}}
             />
           </button>
           {/* <!-- Hamburger Toggle BTN --> */}

@@ -1,6 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
 import { useDispatch, TypedUseSelectorHook, useSelector } from "react-redux";
 import { globalLanguageReducer } from "./globalLanguageSlice";
+import {sidebarReducer } from "./sidebarOpenSlice";
+import {dashboardReducer} from "./dashboardVisitedSlice";
+import {routeReducer} from "./routeVisitedSlice"
 import logger from 'redux-logger';
 import { persistStore, persistReducer } from 'redux-persist';
 import storage from 'redux-persist/lib/storage'; // defaults to localStorage for web
@@ -10,8 +13,18 @@ const shieldPersistConfig = {
   storage,
 };
 
-const quizRefreshPersistConfig = {
-  key: 'quiz',
+const sidebarConfig = {
+  key: 'sidebar',
+  storage,
+};
+
+const dashboardVisitedConfig = {
+  key: 'dashboardVisited',
+  storage,
+};
+
+const routeVisitedConfig = {
+  key: 'routeVisited',
   storage,
 };
 
@@ -22,8 +35,14 @@ const globalLanguageConfig = {
 
 const languagePersistReducer = persistReducer(globalLanguageConfig, globalLanguageReducer);
 
+const sidebarPersistReducer = persistReducer(sidebarConfig, sidebarReducer);
+
+const dashboardVisitedPersistReducer = persistReducer(dashboardVisitedConfig, dashboardReducer);
+
+const routeVisitedPersistReducer = persistReducer(routeVisitedConfig, routeReducer);
+
 export const store = configureStore({
-  reducer: { globalLanguage: languagePersistReducer },
+  reducer: { globalLanguage: languagePersistReducer, sidebarConfig: sidebarPersistReducer, dashboardVisitedConfig: dashboardVisitedPersistReducer, routeVisitedConfig: routeVisitedPersistReducer},
   middleware: (getDefaultMiddleware) =>
     getDefaultMiddleware({ serializableCheck: false }).concat(logger),
 });

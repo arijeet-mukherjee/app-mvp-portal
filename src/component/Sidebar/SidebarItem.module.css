@@ -2,23 +2,36 @@
     display: grid; /* Use grid layout */
     grid-template-columns: 1fr; /* icon, text, optional SVG */
     align-items: center; /* Center items vertically */
-    gap: 10px; /* Adjust the gap between grid items as needed */
+    gap: calc((100vw / 1920) * 10); /* Adjust the gap between grid items as needed */
+    cursor: pointer;
 }
 
 .sidebaritemLink{
     display: grid;
-    gap: 20px;
+    gap: calc((100vw / 1920) * 20);
     grid-template-columns: auto 1fr;
     grid-template-rows: 1fr;
+    align-items: center;
     color: #fff;
     text-decoration: none;
-    padding-left: calc((100vw / 1920) * 16);
+    padding-left: calc((100vw / 1920) * 27);
     padding-top: calc((100vw / 1920) * 8);
     padding-bottom: calc((100vw / 1920) * 8);
+    padding-right: calc((100vw / 1920) * 27);
     transition: background-color 0.3s;
 }
 
 .sidebaritemActive{
     background-color: #5F44FF;
     color: #fff;
+}
+
+svg{
+    height: inherit;
+    width: 100%;
+}
+
+.imageIcon{
+    height: calc((100vw/1920)*22);
+    width: calc((100vw/1920)*27.5);
 }
