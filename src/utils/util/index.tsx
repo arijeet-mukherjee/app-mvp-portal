@@ -130,3 +130,18 @@ export const priceAfterDiscount = (originalPrice: number, discountPercentage: nu
     const discountAmount = (originalPrice * discountPercentage) / 100;
     return Math.round(originalPrice - discountAmount);
 }
+
+export const formatDate = (dateString : string) => {
+    const date = new Date(dateString);
+    const formattedDate = new Intl.DateTimeFormat('en-GB', {
+        day: '2-digit',
+        month: 'long',
+        year: 'numeric',
+    }).format(date);
+
+    // Capitalize first letter of each part
+    return formattedDate
+        .split(' ')
+        .map(word => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+        .join(' ');
+};

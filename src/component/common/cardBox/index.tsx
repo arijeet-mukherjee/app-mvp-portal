@@ -4,7 +4,8 @@ import styles from './styles.module.css';
 import Image, { StaticImageData } from 'next/image';
 import Link from 'next/link';
 import { useState, ReactNode } from 'react';
-import { isMobile, emailVerified, makeWebServiceCall } from '@util/index';
+import { isMobile, emailVerified, makeWebServiceCall, formatDate } from '@util/index';
+import MyImageComponent from '@/component/common/MyImageComponent';
 
 interface CardBoxProps {
     background?: {
@@ -39,6 +40,8 @@ interface CardBoxProps {
     fullGradient?: boolean,
     child?: ReactNode,
     redirectComponent?: any
+    videoThumbnail?: any;
+    createdAt: string;
 };
 
 const CardBox: React.FC<CardBoxProps> = (props: CardBoxProps) => {
@@ -62,6 +65,7 @@ const CardBox: React.FC<CardBoxProps> = (props: CardBoxProps) => {
             inputEmail.current.style.outline = "#dc3545 solid";
         }
     };
+
 
     const handelSubmit = (e: React.MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
@@ -101,7 +105,7 @@ const CardBox: React.FC<CardBoxProps> = (props: CardBoxProps) => {
             setBackgroundSize({ height: props.background?.mHeight, width: props.background?.mWidth });
 
             if (props.fullGradient) {
-                setCardGradient({ background: "linear-gradient(108.31deg, #FFFFFF 34.81%, #C7D5E0 78.11%)" });
+                setCardGradient({ background: "#F2F2F2" });
             }
 
             if (props.gridArea) {
@@ -110,16 +114,20 @@ const CardBox: React.FC<CardBoxProps> = (props: CardBoxProps) => {
             }
             else {
                 setCardContentStyle({ gridRow: 2, gridColumn: 1 });
-                setCardImageStyle({ gridRow: 1, gridColumn: 1, background: "linear-gradient(108.31deg, #FFFFFF 34.81%, #C7D5E0 78.11%)" });
+                setCardImageStyle({ gridRow: 1, gridColumn: 1, background: "#F2F2F2" });
             }
         } else {
             setCardContentStyle({ gridColumn: props.iconPosition == "right" ? 1 : 2, gridRow: 1, paddingLeft: props.paddingLeftContent ? props.paddingLeftContent : 0 });
             setCardImageStyle({ gridColumn: props.iconPosition == "right" ? 2 : 1, gridRow: 1, paddingLeft: props.paddingImageContent ? props.paddingImageContent : 0 });
-            setCardGradient({ background: props.iconPosition == "left" ? "linear-gradient(270.59deg, #FFFFFF 35.89%, #C7D5E0 79.41%)" : "linear-gradient(108.31deg, #FFFFFF 34.81%, #C7D5E0 78.11%)", gridRow: 1 });
+            setCardGradient({ background: props.iconPosition == "left" ? "#F2F2F2" : "#F2F2F2", gridRow: 1 });
         }
     }, []);
 
-    const { image, background, title, description, iconPosition, buttonText, inputBox, bulletPointImg, bulletPoints, child } = props;
+    const { image, background, createdAt ,title, description, iconPosition, buttonText, inputBox, bulletPointImg, bulletPoints, child, videoThumbnail } = props;
+
+
+    const formattedDate = formatDate(createdAt);
+
     return (
 
         <div className={styles["cardbox-card"]} style={cardGradient} >
@@ -141,8 +149,9 @@ const CardBox: React.FC<CardBoxProps> = (props: CardBoxProps) => {
                     </div>
                     :
                     <p className={styles["cardbox-description"]}>{description}</p>
+                    
                 }
-
+                <p className={styles["cardbox-createdAt"]}>{formattedDate}</p>
                 {inputBox && buttonText ?
                     (<div className={styles.inputBoxWithButton}>
                         <input type="email" name='email' placeholder={inputBox} ref={inputEmail} value={email} onChange={handelInput} className={styles.inputBox} />
@@ -167,11 +176,9 @@ const CardBox: React.FC<CardBoxProps> = (props: CardBoxProps) => {
                         : <></>
                 }
             </div>
-            {(image || child) &&
+            {(videoThumbnail || child) &&
                 <div className={styles["cardbox-image"]} style={cardImageStyle}>
-                    <div className={styles["card-image-outer"]} style={{ width: backgroundSize.width, height: backgroundSize.height, backgroundImage: starPath, backgroundPosition: "center", backgroundSize: "contain", backgroundRepeat: "no-repeat" }}>
-                        {image && <Image src={image?.path} alt={image?.title} style={{ width: imageSize.width, height: imageSize.height }} width={200} height={200} />}               </div>
-                    {child && child}
+                    <MyImageComponent src={ videoThumbnail} alt={title} className={styles.videoThumbnail} width={200} height={200} />             
                 </div>
             }
         </div>
